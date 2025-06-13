@@ -89,6 +89,37 @@ async def get_index():
             .download-btn:hover {
                 background-color: #45a049;
             }
+
+            @media screen and (max-width: 500px) {
+                body {
+                    padding: 10px;
+                }
+                .container {
+                    padding: 10px;
+                }
+                .input-group input[type="text"] {
+                    width: 100%;
+                    max-width: 250px;
+                    margin-bottom: 10px;
+                }
+                .controls {
+                    flex-direction: column;
+                    gap: 10px;
+                }
+                .controls div {
+                    margin: 5px 0;
+                }
+                h1 {
+                    font-size: 1.5em;
+                }
+                #imageSize {
+                    width: 60px;
+                }
+                .download-btn {
+                    width: 100%;
+                    max-width: 200px;
+                }
+            }
         </style>
     </head>
     <body>
