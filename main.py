@@ -62,6 +62,46 @@ HTML_TEMPLATE = """<!DOCTYPE html>
             max-width: 100%;
             margin: 0 auto;
         }
+        .error {
+            color: red;
+            text-align: center;
+            margin-top: 10px;
+        }
+        .download-btn {
+            display: none;
+            margin-top: 10px;
+        }
+
+        @media screen and (max-width: 500px) {
+            body {
+                padding: 10px;
+            }
+            .container {
+                padding: 10px;
+            }
+            .input-group input[type="text"] {
+                width: 100%;
+                max-width: 250px;
+                margin-bottom: 10px;
+            }
+            .controls {
+                flex-direction: column;
+                gap: 10px;
+            }
+            .controls div {
+                margin: 5px 0;
+            }
+            h1 {
+                font-size: 1.5em;
+            }
+            #imageSize {
+                width: 60px;
+            }
+            .download-btn {
+                width: 100%;
+                max-width: 200px;
+            }
+        }
     </style>
 </head>
 <body>
@@ -69,7 +109,10 @@ HTML_TEMPLATE = """<!DOCTYPE html>
         <h1>smilesDrawer</h1>
         <div class="input-group">
             <input type="text" id="smiles" placeholder="SMILES">
-            <button onclick="getMolecule()">View</button>
+            <div class="button-group">
+                <button onclick="clearInput()">Clear</button>
+                <button onclick="getMolecule()">View</button>
+            </div>
         </div>
         <div class="controls">
             <div>
@@ -132,6 +175,25 @@ HTML_TEMPLATE = """<!DOCTYPE html>
 
         document.getElementById('smiles').addEventListener('keypress', function(e) {
             if (e.key === 'Enter') {
+                getMolecule();
+            }
+        });
+
+        function clearInput() {
+            document.getElementById('smiles').value = '';
+            document.getElementById('molecule').style.display = 'none';
+            document.getElementById('error').textContent = '';
+            document.getElementById('path-info').textContent = '';
+        }
+
+        document.getElementById('imageSize').addEventListener('change', function() {
+            if (document.getElementById('smiles').value) {
+                getMolecule();
+            }
+        });
+
+        document.getElementById('imageFormat').addEventListener('change', function() {
+            if (document.getElementById('smiles').value) {
                 getMolecule();
             }
         });
